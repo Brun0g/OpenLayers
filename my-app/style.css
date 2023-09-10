@@ -1,6 +1,7 @@
 @import "node_modules/ol/ol.css";
 
-html, body {
+html,
+body {
   margin: 0;
   height: 100%;
 }
@@ -9,4 +10,60 @@ html, body {
   top: 0;
   bottom: 0;
   width: 100%;
+}
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  z-index: 1000;
+  position: absolute;
+}
+
+/* Estilo para os ícones de perigo */
+.danger-icon {
+  font-size: 24px;
+  color: red;
+  position: absolute;
+  z-index: 1000;
+}
+
+/* Estilo para o conteúdo da barra lateral */
+.sidebar-content {
+  padding: 20px;
+  color: white;
+}
+
+/* Estilo para o botão de abertura da barra lateral */
+#openSidebar {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #333;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* Estilo para o botão de fechamento da barra lateral */
+#closeSidebar {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+.context-menu {
+  display: none;
+  /* Outros estilos aqui */
 }
