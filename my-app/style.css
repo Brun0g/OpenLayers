@@ -1,28 +1,76 @@
 @import "node_modules/ol/ol.css";
 
+:root {
+  --cor-background: rgb(255, 255, 255);
+  --cor-secundaria: #3b71ca;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html,
 body {
   margin: 0;
   height: 100%;
+  background-color: var(--cor-background);
 }
+
+#logo {
+  display: flex;
+  justify-content: center;
+}
+
+#logo1 {
+  float: left;
+  display: flex;
+  margin-top: 645px;
+}
+
+#teste {
+  text-align: center;
+  color: black;
+}
+
+#text {
+  background-color: var(--cor-secundaria);
+  color: white;
+}
+
+#formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
 #map {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 100%;
 }
+
 .sidebar {
   height: 100%;
   width: 0;
   position: fixed;
   top: 0;
   right: 0;
-  background-color: #111;
+  background-color: var(--cor-background);
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
+  padding-top: 40px;
   z-index: 1000;
   position: absolute;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
 }
 
 /* Estilo para os ícones de perigo */
@@ -44,26 +92,82 @@ body {
   position: fixed;
   top: 20px;
   right: 20px;
-  background-color: #333;
-  color: white;
-  padding: 10px 15px;
   border: none;
+  background: none;
   cursor: pointer;
   z-index: 1001;
+}
+
+#toggleLayerButton {
+  position: fixed;
+  top: 100px;
+  left: 20px;
+  border: none;
+  color: white;
+  background: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+#toggleLayerButton img {
+  width: 50px;
+}
+
+#openSidebar img {
+  width: 50px;
 }
 
 /* Estilo para o botão de fechamento da barra lateral */
 #closeSidebar {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: #111;
+  top: 20px;
+  left: 20px;
+  background-color: var(--cor-secundaria);
   color: white;
   padding: 10px 15px;
   border: none;
   cursor: pointer;
 }
+
 .context-menu {
   display: none;
-  /* Outros estilos aqui */
+}
+
+.centralizar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  position: relative;
+  font-weight: 900;
+}
+
+#mensagem-sucesso {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  position: absolute;
+  z-index: 1;
+}
+
+#mensagem-sucesso i {
+  font-size: 40px;
+  color: green;
+}
+
+#home-barra-midias-sociais-not {
+  float: right;
+  margin-top: 710px;
+  margin-right: 50px;
+}
+
+.home-barra-midias-sociais-not-interna {
+  display: flex;
+}
+
+.home-barra-midias-sociais-item-not {
+  padding: 10px;
 }

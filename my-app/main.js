@@ -1,3 +1,4 @@
+// Importar bibliotecas e estilos necessários
 import "./style.css";
 import { Map, View } from "ol";
 import OSM from "ol/source/OSM";
@@ -10,63 +11,68 @@ import Feature from "ol/Feature";
 import { Point } from "ol/geom";
 import { Icon, Style } from "ol/style";
 
+// Função de inicialização
 function init() {
   let map = new Map({
     target: "map",
     layers: [
       new TileLayer({
-        source: new OSM(),
+        source: new OSM(), // Camada base do OpenStreetMap
       }),
     ],
     view: new View({
-      center: [-5108152.4828673, -2654682.872722094],
-      zoom: 12,
+      center: [-5108152.4828673, -2654682.872722094], // Coordenadas iniciais do centro do mapa
+      zoom: 12, // Nível de zoom inicial
       maxZoom: 20,
       minZoom: 10,
-      // rotation: 0.5,
     }),
   });
 
-  const openStreetMapStandard = new TileLayer({
-    source: new OSM(),
-    visible: false,
-    title: "OSMStandard",
-  });
-  const openStreetMapHumanitarian = new TileLayer({
-    source: new OSM({
-      url: "https://{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+  // Configurar camadas de mapa
+  const layers = [
+    new TileLayer({
+      source: new OSM(),
+      visible: true,
+      title: "OSMStandard",
     }),
-    visible: false,
-    title: "OSMHumanitarian",
-  });
-
-  const stamenTerrain = new TileLayer({
-    source: new XYZ({
-      url: "http://tile.stamen.com/terrain/{z}/{x}/{y}.jpg",
-      attributions: "For Toner and Terrain: Map tiles by <a href='http://stamen.com'>Stamen Design</a> under CC BY 4.0. Data by OpenStreetMap, under ODbL.",
+    new TileLayer({
+      source: new OSM({
+        url: "https://{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+      }),
+      visible: false,
+      title: "OSMHumanitarian",
     }),
-    visible: false,
-    title: "StamenTerrain",
-  });
+    new TileLayer({
+      source: new XYZ({
+        url: "http://tile.stamen.com/terrain/{z}/{x}/{y}.jpg",
+        attributions: "For Terrain: Map tiles by <a href='http://stamen.com'>Stamen Design</a> under CC BY 4.0. Data by OpenStreetMap, under ODbL.",
+      }),
+      visible: false,
+      title: "StamenTerrain",
+    }),
+  ];
 
-  // Create a layer group for base layers
+  // Criar um grupo de camadas para camadas base
   const baseLayerGroup = new LayerGroup({
-    layers: [openStreetMapStandard, openStreetMapHumanitarian, stamenTerrain],
+    layers: layers,
   });
 
-  // Add the base layer group to the map
+  // Adicionar o grupo de camadas base ao mapa
   map.addLayer(baseLayerGroup);
+
+  // Adicionar um evento de clique para mostrar a barra lateral
   document.getElementById("openSidebar").addEventListener("click", function () {
-    document.getElementById("sidebar").style.width = "250px";
+    document.getElementById("sidebar").style.width = "512px";
   });
 
-  // Crie uma camada vetorial para os ícones de perigo
+  // Criar uma camada de vetores para ícones de perigo
   const dangerSource = new VectorSource();
   const dangerLayer = new VectorLayer({
     source: dangerSource,
   });
   map.addLayer(dangerLayer);
 
+  // Função para adicionar um ícone de perigo no mapa
   function addDangerIcon(coordinates) {
     const iconFeature = new Feature({
       geometry: new Point(coordinates),
@@ -74,27 +80,60 @@ function init() {
 
     const iconStyle = new Style({
       image: new Icon({
-        src: "danger.png",
+        src: "danger.png", // Caminho para a imagem do ícone de perigo
         scale: 0.1,
       }),
     });
 
     iconFeature.setStyle(iconStyle);
     dangerSource.addFeature(iconFeature);
+
+    // Centralizar o mapa nas coordenadas do ícone
+    map.getView().setCenter(coordinates);
   }
 
+  // Adicionar um evento de clique no mapa para relatar uma reclamação
   map.on("click", function (event) {
-    addDangerIcon(event.coordinate);
-    console.log(event.coordinate);
+    const isConfirmed = window.confirm("Are you sure you want to report a complaint?");
+
+    if (isConfirmed) {
+      addDangerIcon(event.coordinate);
+
+      // Mostrar a barra lateral e esconder o botão de abertura
+      document.getElementById("sidebar").style.width = "512px";
+      document.getElementById("openSidebar").style.display = "none";
+    }
   });
 
+  // Adicionar um evento de clique para fechar a barra lateral
   document.getElementById("closeSidebar").addEventListener("click", function () {
-    document.getElementById("sidebar").style.width = "0"; // Oculta o sidebar
+    document.getElementById("sidebar").style.width = "0"; // Ocultar a barra lateral
+    document.getElementById("openSidebar").style.display = "flex";
   });
 
-  document.getElementById("openSidebar").addEventListener("click", function () {
-    document.getElementById("sidebar").style.width = "250px"; // Ou a largura desejada
+  // Adicionar um evento de clique para alternar entre as camadas do mapa
+  const toggleLayerButton = document.getElementById("toggleLayerButton");
+  let currentLayerIndex = 0;
+
+  toggleLayerButton.addEventListener("click", function () {
+    // Ocultar a camada atual
+    layers[currentLayerIndex].setVisible(false);
+
+    // Atualizar o índice da camada atual
+    currentLayerIndex = (currentLayerIndex + 1) % layers.length;
+
+    // Mostrar a próxima camada
+    layers[currentLayerIndex].setVisible(true);
   });
 }
 
-init();
+// Função chamada quando a janela é carregada
+window.onload = function () {
+  init();
+
+  document.getElementById("sidebar").style.display = "flex";
+  document.getElementById("logo1").style.display = "block";
+  document.getElementById("openSidebar").style.display = "block";
+  document.getElementById("home-barra-midias-sociais-not").style.display = "flex";
+  document.getElementById("toggleLayerButton").style.display = "block";
+};
