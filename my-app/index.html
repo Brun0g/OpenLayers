@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/x-icon" href="https://openlayers.org/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -24,7 +24,6 @@
 
 <body>
   <div id="map"></div>
-  <button id="openSidebar" style="display: none;"></button>
   <button id="toggleLayerButton" style="display: none;"><img src="images/mapa.png" alt="troca camada"></button>
   <div id="logo1" style="display: none;">
     <img src="/images/logo.png" alt="logoPrefeitura" />
@@ -63,8 +62,8 @@
 
             <!-- Endereço input -->
             <div class="form-outline mb-3">
-              <input type="text" id="endereço" class="form-control dados" required />
-              <label class="form-label" for="endereço">Endereço</label>
+              <input type="text" id="endereco" class="form-control dados" required />
+              <label class="form-label" for="endereco">Endereço</label>
             </div>
 
             <!-- Estado e cidade inputs -->
@@ -112,7 +111,7 @@
 
             <!-- Message input -->
             <div class="form-outline mb-3">
-              <textarea class="form-control" id="mensagem" rows="4" data-mdb-showcounter="true" maxlength="800" required></textarea>
+              <textarea class="form-control " id="mensagem" rows="4" data-mdb-showcounter="true" maxlength="800" required></textarea>
               <label class="form-label" for="mensagem">Mensagem</label>
               <div class="form-helper"></div>
             </div>
@@ -130,11 +129,14 @@
       </div>
     </div>
   </div>
-  <div id="centralizar">
-    <div id="mensagem-sucesso" style="display: none;">
-      <p>Formulário enviado com sucesso!</p>
-      <i class="fa fa-check-circle"></i>
-    </div>
+  <div id="mensagem-sucesso" style="display: none;">
+    <p>Formulário enviado com sucesso!</p>
+    <i class="fa fa-check-circle"></i>
+  </div>
+  <div id="confirmar-local" style="display: none;">
+    <p>Você quer reportar um problema urbano?</p>
+    <button id="button-check1">Confirmar <i class="fa fa-check-circle"></i></button>
+    <button id="button-check2">Desistir <i class="fa fa-times-circle" aria-hidden="true"></i></button>
   </div>
   <div id="home-barra-midias-sociais-not" style="display: none;">
     <div class="home-barra-midias-sociais-not-interna">

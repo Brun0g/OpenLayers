@@ -133,29 +133,55 @@ body {
   display: none;
 }
 
-.centralizar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  position: relative;
-  font-weight: 900;
-}
-
 #mensagem-sucesso {
   text-align: center;
   background-color: #ffffff;
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
-  position: absolute;
+  position: fixed;
   z-index: 1;
+  border: 1px solid;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #mensagem-sucesso i {
   font-size: 40px;
   color: green;
+}
+
+#confirmar-local {
+  text-align: center;
+  background-color: var(--cor-secundaria);
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  position: fixed;
+  z-index: 1;
+  border: 1px solid;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: lighter;
+}
+
+#button-check1,
+#button-check2 {
+  padding: 5px;
+  border-radius: 7px;
+  border: none;
+  background-color: white;
+}
+
+#button-check1 i.fa-check-circle {
+  color: green;
+}
+
+#button-check2 i.fa-times-circle {
+  color: red;
 }
 
 #home-barra-midias-sociais-not {

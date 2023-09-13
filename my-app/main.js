@@ -1,4 +1,3 @@
-// Importar bibliotecas e estilos necessários
 import "./style.css";
 import { Map, View } from "ol";
 import OSM from "ol/source/OSM";
@@ -60,11 +59,6 @@ function init() {
   // Adicionar o grupo de camadas base ao mapa
   map.addLayer(baseLayerGroup);
 
-  // Adicionar um evento de clique para mostrar a barra lateral
-  document.getElementById("openSidebar").addEventListener("click", function () {
-    document.getElementById("sidebar").style.width = "512px";
-  });
-
   // Criar uma camada de vetores para ícones de perigo
   const dangerSource = new VectorSource();
   const dangerLayer = new VectorLayer({
@@ -80,7 +74,7 @@ function init() {
 
     const iconStyle = new Style({
       image: new Icon({
-        src: "danger.png", // Caminho para a imagem do ícone de perigo
+        src: "../images/danger.png", // Caminho para a imagem do ícone de perigo
         scale: 0.1,
       }),
     });
@@ -94,21 +88,38 @@ function init() {
 
   // Adicionar um evento de clique no mapa para relatar uma reclamação
   map.on("click", function (event) {
-    const isConfirmed = window.confirm("Are you sure you want to report a complaint?");
+    let reportAlert = document.getElementById("confirmar-local");
+    reportAlert.style.display = "block";
+    addDangerIcon(event.coordinate);
 
-    if (isConfirmed) {
-      addDangerIcon(event.coordinate);
+    document.getElementById("button-check1").addEventListener("click", function () {
+      let mensagemSucesso = document.getElementById("mensagem-sucesso");
+      let sidebar = document.getElementById("sidebar");
 
-      // Mostrar a barra lateral e esconder o botão de abertura
+      reportAlert.style.display = "none";
       document.getElementById("sidebar").style.width = "512px";
-      document.getElementById("openSidebar").style.display = "none";
-    }
-  });
+      sidebar.style.display = "block";
 
-  // Adicionar um evento de clique para fechar a barra lateral
-  document.getElementById("closeSidebar").addEventListener("click", function () {
-    document.getElementById("sidebar").style.width = "0"; // Ocultar a barra lateral
-    document.getElementById("openSidebar").style.display = "flex";
+      if (reportAlert) {
+        document.getElementById("closeSidebar").addEventListener("click", function () {
+          document.getElementById("sidebar").style.width = "0"; // Ocultar a barra lateral
+          document.getElementById("openSidebar").style.display = "flex";
+        });
+        let btnEnviar = document.getElementById("btn-enviar");
+
+        btnEnviar.addEventListener("click", function (event) {
+          event.preventDefault();
+          let camposPreenchidos = true;
+          if (camposPreenchidos) {
+            document.getElementById("sidebar").style.width = "0"; // Ocultar a barra lateral
+            mensagemSucesso.style.display = "block";
+            setTimeout(function () {
+              mensagemSucesso.style.display = "none";
+            }, 1500);
+          }
+        });
+      }
+    });
   });
 
   // Adicionar um evento de clique para alternar entre as camadas do mapa
@@ -133,7 +144,6 @@ window.onload = function () {
 
   document.getElementById("sidebar").style.display = "flex";
   document.getElementById("logo1").style.display = "block";
-  document.getElementById("openSidebar").style.display = "block";
   document.getElementById("home-barra-midias-sociais-not").style.display = "flex";
   document.getElementById("toggleLayerButton").style.display = "block";
 };
