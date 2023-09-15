@@ -24,12 +24,12 @@
 
 <body>
   <div id="map"></div>
-  <button id="toggleLayerButton" style="display: none;"><img src="images/mapa.png" alt="troca camada"></button>
-  <div id="logo1" style="display: none;">
+  <button id="toggleLayerButton" style="display: none"><img src="images/mapa.png" alt="troca camada" /></button>
+  <div id="logo1" style="display: none">
     <img src="/images/logo.png" alt="logoPrefeitura" />
   </div>
   <!-- Barra lateral -->
-  <div id="sidebar" class="sidebar" style="display: none;">
+  <div id="sidebar" class="sidebar" style="display: none">
     <div class="container">
       <button id="closeSidebar">Fechar</button>
       <div class="sidebar-content">
@@ -47,22 +47,22 @@
           </container>
         </div>
         <div id="formulario">
-          <form>
+          <form id="meuFormulario" action="/backend/routes.js" method="POST" type="submit">
             <!-- Name input -->
             <div class="form-outline mb-3">
-              <input type="text" id="nome" class="form-control dados" required />
+              <input type="text" id="nome" class="form-control dados" name="nome" required />
               <label class="form-label" for="nome">Nome</label>
             </div>
 
             <!-- Cep input -->
             <div class="form-outline mb-3">
-              <input type="text" id="cep" class="form-control dados" maxlength="8" required />
+              <input type="text" id="cep" class="form-control dados" name="cep" maxlength="8" required />
               <label class="form-label" for="cep">CEP</label>
             </div>
 
             <!-- Endereço input -->
             <div class="form-outline mb-3">
-              <input type="text" id="endereco" class="form-control dados" required />
+              <input type="text" id="endereco" class="form-control dados" name="endereco" required />
               <label class="form-label" for="endereco">Endereço</label>
             </div>
 
@@ -70,13 +70,13 @@
             <div class="row mb-3">
               <div class="col">
                 <div class="form-outline">
-                  <input type="text" id="estado" class="form-control dados" required />
+                  <input type="text" id="estado" class="form-control dados" maxlength="2" name="estado" required />
                   <label class="form-label" for="estado">Estado</label>
                 </div>
               </div>
               <div class="col">
                 <div class="form-outline">
-                  <input type="text" id="cidade" class="form-control dados" required />
+                  <input type="text" id="cidade" class="form-control dados" name="cidade" required />
                   <label class="form-label" for="cidade">Cidade</label>
                 </div>
               </div>
@@ -84,24 +84,24 @@
 
             <!-- Bairro input -->
             <div class="form-outline mb-3">
-              <input type="text" id="bairro" class="form-control dados" required />
+              <input type="text" id="bairro" class="form-control dados" name="bairro" required />
               <label class="form-label" for="bairro">Bairro</label>
             </div>
 
             <!-- Telefone input -->
             <div class="form-outline mb-3">
-              <input type="tel" id="telefone" class="form-control dados" maxlength="11" required />
+              <input type="tel" id="telefone" class="form-control dados" name="telefone" maxlength="11" required />
               <label class="form-label" for="telefone">Telefone</label>
             </div>
 
             <!-- Email input -->
             <div class="form-outline mb-3">
-              <input type="email" id="email" class="form-control dados" required />
+              <input type="email" id="email" class="form-control dados" name="email" required />
               <label class="form-label" for="email">Email</label>
             </div>
 
             <!-- Select -->
-            <select class="form-select mb-3">
+            <select id="tipo" class="form-select mb-3" name="tipo" required>
               <option selected disabled>Selecione a área do problema</option>
               <option value="buraco">Buraco na rua</option>
               <option value="arvore">Árvore caída</option>
@@ -109,16 +109,16 @@
               <option value="poste">Poste caído</option>
             </select>
 
+
             <!-- Message input -->
             <div class="form-outline mb-3">
-              <textarea class="form-control " id="mensagem" rows="4" data-mdb-showcounter="true" maxlength="800" required></textarea>
+              <textarea class="form-control " id="mensagem" rows="4" data-mdb-showcounter="true" maxlength="255" name="mensagem" required></textarea>
               <label class="form-label" for="mensagem">Mensagem</label>
               <div class="form-helper"></div>
             </div>
-
             <!-- Checkbox -->
             <div class="form-check d-flex justify-content-center mb-3">
-              <input class="form-check-input me-2" type="checkbox" value="" id="termos" checked required />
+              <input class="form-check-input me-2" type="checkbox" value="true" id="termos" checked name="termos" required />
               <label class="form-check-label" for="termos"> Concordo em fornecer meus dados pessoais para futuro contato </label>
             </div>
 
@@ -129,50 +129,50 @@
       </div>
     </div>
   </div>
-  <div id="mensagem-sucesso" style="display: none;">
+  <div id="mensagem-sucesso" style="display: none">
     <p>Formulário enviado com sucesso!</p>
     <i class="fa fa-check-circle"></i>
   </div>
-  <div id="confirmar-local" style="display: none;">
+  <div id="confirmar-local" style="display: none">
     <p>Você quer reportar um problema urbano?</p>
     <button id="button-check1">Confirmar <i class="fa fa-check-circle"></i></button>
     <button id="button-check2">Desistir <i class="fa fa-times-circle" aria-hidden="true"></i></button>
   </div>
-  <div id="home-barra-midias-sociais-not" style="display: none;">
+  <div id="home-barra-midias-sociais-not" style="display: none">
     <div class="home-barra-midias-sociais-not-interna">
       <div class="home-barra-midias-sociais-item-not">
         <a href="https://api.whatsapp.com/send/?phone=551236002555" target="_blank" rel="noopener noreferer">
-          <img src="images/whatsapp.svg" class="hover-img1 midias-aling img-upresp" target="_blank" title="Whatsapp" alt="Whatsapp" id="Whatsapp" onclick="trackEvent(this)" width="20" height="20">
+          <img src="images/whatsapp.svg" class="hover-img1 midias-aling img-upresp" target="_blank" title="Whatsapp" alt="Whatsapp" id="Whatsapp" onclick="trackEvent(this)" width="20" height="20" />
         </a>
       </div>
       <div class="home-barra-midias-sociais-item-not">
         <a href="https://www.facebook.com/PrefeituraSJC/" target="_blank" rel="noopener noreferer">
-          <img src="images/facebook.svg" class="hover-img1 midias-aling img-upresp" title="Facebook" alt="Facebook" id="Facebook" onclick="trackEvent(this)" width="20" height="20">
+          <img src="images/facebook.svg" class="hover-img1 midias-aling img-upresp" title="Facebook" alt="Facebook" id="Facebook" onclick="trackEvent(this)" width="20" height="20" />
         </a>
       </div>
       <div class="home-barra-midias-sociais-item-not">
         <a href="https://twitter.com/prefeiturasjc" target="_blank" rel="noopener noreferer">
-          <img src="images/n_twitter.svg" class="hover-img1 midias-aling img-upresp" title="Twitter" alt="Twitter" id="Twitter" onclick="trackEvent(this)" width="20" height="20">
+          <img src="images/n_twitter.svg" class="hover-img1 midias-aling img-upresp" title="Twitter" alt="Twitter" id="Twitter" onclick="trackEvent(this)" width="20" height="20" />
         </a>
       </div>
       <div class="home-barra-midias-sociais-item-not">
         <a href="https://www.instagram.com/prefeiturasjcamposoficial" target="_blank" rel="noopener noreferer">
-          <img src="images/instagram.svg" class="hover-img1 midias-aling img-upresp" title="Instagram" alt="Instagram" id="Instagram" onclick="trackEvent(this)" width="20" height="20">
+          <img src="images/instagram.svg" class="hover-img1 midias-aling img-upresp" title="Instagram" alt="Instagram" id="Instagram" onclick="trackEvent(this)" width="20" height="20" />
         </a>
       </div>
       <div class="home-barra-midias-sociais-item-not">
         <a href="https://www.flickr.com/photos/pmsjc/albums" target="_blank" rel="noopener noreferer">
-          <img src="images/flickr.svg" class="hover-img1 midias-aling img-upresp" title="Flickr" alt="Flickr" id="Flickr" onclick="trackEvent(this)" width="20" height="20">
+          <img src="images/flickr.svg" class="hover-img1 midias-aling img-upresp" title="Flickr" alt="Flickr" id="Flickr" onclick="trackEvent(this)" width="20" height="20" />
         </a>
       </div>
       <div class="home-barra-midias-sociais-item-not">
         <a href="http://www.youtube.com/channel/UCAE2QZaYE_434DJrp32aPkQ" target="_blank" rel="noopener noreferer">
-          <img src="images/youtube.svg" class="hover-img1 midias-aling img-upresp" title="YouTube" alt="YouTube" id="YouTube" onclick="trackEvent(this)" width="20" height="20">
+          <img src="images/youtube.svg" class="hover-img1 midias-aling img-upresp" title="YouTube" alt="YouTube" id="YouTube" onclick="trackEvent(this)" width="20" height="20" />
         </a>
       </div>
     </div>
   </div>
-  <script src="scripts/script.js"></script>
+
   <script type="module" src="./main.js"></script>
 </body>
 

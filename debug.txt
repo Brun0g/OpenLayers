@@ -1,0 +1,35 @@
+npm install express
+npm install -g nodemon
+npm install cors
+npm install pg
+npm install cors
+
+// package.json
+ "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/server.js" <------------------
+  },
+npm run dev
+S.O.L.I.D
+
+
+
+fetch("http://localhost:3000/")
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Erro ao buscar posições.");
+      }
+    })
+    .then((data) => {
+      // 'data' conterá todas as posições recuperadas do servidor
+      console.log("Posições recuperadas:", data);
+      data.forEach((coordenada) => {
+        addDangerIcon(coordenada); // Chama a função para adicionar ícone de perigo
+      });
+    })
+    .catch((error) => {
+      console.error("Erro:", error.message);
+      // Lide com o erro de acordo com a necessidade do seu aplicativo
+    });
