@@ -5,7 +5,7 @@ const db = pgp({
   user: "",
   password: "",
   host: "",
-  port: ,
+  port: "",
   database: "",
 });
 
