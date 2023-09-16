@@ -87,10 +87,16 @@ function init() {
     let reportAlert = document.getElementById("confirmar-local");
 
     reportAlert.style.display = "block";
-    addDangerIcon(event.coordinate);
 
+    document.getElementById("button-check2").addEventListener("click", function (event) {
+      event.preventDefault();
+      reportAlert.style.display = "none";
+      coordernada = 0;
+    });
     document.getElementById("button-check1").addEventListener("click", function (event) {
       event.preventDefault();
+
+      addDangerIcon(coordernada);
 
       let sidebar = document.getElementById("sidebar");
 
@@ -101,7 +107,6 @@ function init() {
       if (reportAlert) {
         document.getElementById("closeSidebar").addEventListener("click", function () {
           document.getElementById("sidebar").style.width = "0"; // Ocultar a barra lateral
-          document.getElementById("openSidebar").style.display = "flex";
         });
 
         // Envia os dados como JSON para o servidor
