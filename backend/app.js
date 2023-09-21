@@ -2,8 +2,8 @@ const pgp = require("pg-promise")();
 
 // Configuração da conexão com o banco de dados PostgreSQL
 const db = pgp({
-  user: "postgres",
-  password: "password",
+  user: "",
+  password: "",
   host: "localhost",
   port: "5432",
   database: "prefeitura-sjc",

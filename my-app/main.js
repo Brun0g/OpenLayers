@@ -71,7 +71,7 @@ function init() {
     const iconStyle = new Style({
       image: new Icon({
         src: "../images/danger.png",
-        scale: 0.1,
+        scale: 0.4,
       }),
     });
 
@@ -79,6 +79,30 @@ function init() {
     dangerSource.addFeature(iconFeature);
     map.getView().setCenter(coordinates);
   }
+  fetch("http://localhost:3000/posicoes", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error(`Erro ao enviar o formulário. Status do erro: ${response.status}`);
+      }
+    })
+    .then((dadosDoBancoDeDados) => {
+      for (let i = 0; i < dadosDoBancoDeDados.length; i++) {
+        const posicao = dadosDoBancoDeDados[i].posicao;
+        let coordinate = [posicao[0], posicao[1]];
+
+        addDangerIcon(coordinate);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 
   // Adicionar um evento de clique no mapa para relatar uma reclamação
   map.on("click", function (event) {

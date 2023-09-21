@@ -25,7 +25,7 @@ db.connect()
   });
 
 // Rota para obter a coluna "posicao" de todas as reclamações
-app.get("/", (req, res) => {
+app.get("/posicoes", (req, res) => {
   db.any("SELECT posicao FROM formulario")
     .then((posicoes) => {
       res.json(posicoes);
@@ -35,6 +35,7 @@ app.get("/", (req, res) => {
       res.status(500).json({ error: "Erro ao obter posições." });
     });
 });
+
 // Rota para enviar reclamações para o banco de dados
 app.post("/", (req, res) => {
   const { nome, cep, endereco, estado, cidade, bairro, telefone, email, tipo, mensagem, posicao } = req.body;

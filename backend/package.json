@@ -1,7 +1,27 @@
 {
+  "name": "servidor-mapa-prefeitura",
+  "version": "0.0.1",
+  "description": "Servidor criado para armazenar dados de reclamações por municipes",
+  "main": "./app.js",
+  "scripts": {
+    "dev": "nodemon routes.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brun0g/OpenLayers.git"
+  },
+  "author": "Bruno",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Brun0g/OpenLayers/issues"
+  },
+  "homepage": "https://github.com/Brun0g/OpenLayers#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "pg-promise": "^11.5.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
