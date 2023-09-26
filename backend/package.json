@@ -4,7 +4,7 @@
   "description": "Servidor criado para armazenar dados de reclamações por municipes",
   "main": "./app.js",
   "scripts": {
-    "dev": "nodemon routes.js"
+    "dev": "nodemon ./src/routes.js"
   },
   "repository": {
     "type": "git",
