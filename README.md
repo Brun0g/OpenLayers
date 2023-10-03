@@ -37,7 +37,7 @@ O servidor estará em execução na porta 3000.
 
 ### :computer_mouse: Configuração do Cliente (Front-End)
 
-1. Navegue até o diretório do cliente: `cd client`
+1. Navegue até o diretório do cliente: `cd front-end` e `cd my-app`
 2. Instale as dependências do cliente: `npm install`
 3. Inicialize o cliente: `npm start`
 
